@@ -46,3 +46,18 @@ void State::update(double _t_curr, int _iter, int _tsp, std::vector<int> _path)
     tsp = _tsp;
     path = _path;
 }
+
+void State::show()
+{
+    std::cout << "t_curr: " << t_curr << ", iter: " << iter << ", tsp: " << tsp << std::endl;
+}
+
+void State::show_path()
+{
+    std::cout << "path: { " << std::endl;
+    for (auto p : path)
+    {
+        std::cout << p << ", ";
+    }
+    std::cout << "}" << std::endl;
+}

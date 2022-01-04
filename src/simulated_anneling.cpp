@@ -16,8 +16,6 @@ double move_propability(double t_curr, int optimal_solution, int alternative_sol
 
 bool try_move(State &state, double propability)
 {
-
-    srand(time(NULL));
 }
 
 double decrease_temperature_const(double &t_curr, double alfa)
@@ -31,12 +29,49 @@ double decrease_temperature_dependent(double &t_curr, Params params)
     return t_curr / (1 + beta * t_curr);
 }
 
-int simulated_anneling(State &state, Params &params)
+double tsp(std::vector<int> path, Graph &graph)
 {
+    int res = 0;
+    for (int i = 1; i < path.size(); i++)
+    {
+        res += graph.at(path[i - 1], path[i]);
+    }
+    return res;
+}
+
+std::vector<int> new_path(std::vector<int> &path)
+{
+    std::vector<int> shuffled_path(path);
+    int swap_idx = rand() % (path.size() - 1);
+    std::iter_swap((shuffled_path.begin() + swap_idx), (shuffled_path.begin() + swap_idx + 1));
+    return shuffled_path;
+}
+
+int simulated_anneling(State &state, Params &params, Graph &graph)
+{
+    std::vector<int> init_path(graph.getVertexCount());
+    std::iota(std::begin(init_path), std::end(init_path), 0);
+    state.update(params.get_t_max(), 0, tsp(init_path, graph), init_path);
+
+    std::vector<int> next_path;
+    double random;
+    srand(time(NULL));
     while (continue_optimalization(state, params))
     {
+        next_path = new_path(state.get_path());
+        random = (rand() % 101) / 100;
 
-        //move_propability();
-        //try_move();
+        if (random < move_propability(state.get_t_curr(), state.get_t_tsp(), tsp(next_path, graph)))
+        {
+            state.set_path(next_path);
+            state.set_t_tsp(tsp(next_path, graph));
+        }
+        state.set_t_curr(decrease_temperature_dependent(state.get_t_curr(), params));
+        state.set_iter(1 + state.get_iter());
+        //state.show();
+        //state.show_path();
     }
+    std::cout << "Simulated anneling solution: " << std::endl;
+    state.show_path();
+    state.show();
 }

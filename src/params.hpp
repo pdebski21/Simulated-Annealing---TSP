@@ -37,11 +37,17 @@ public:
     State();
     State(double _t_curr, int _iter, int _tsp, std::vector<int> _path);
     void update(double _t_curr, int _iter, int _tsp, std::vector<int> _path);
+    void show();
+    void show_path();
 
     double &get_t_curr() { return t_curr; }
     int &get_iter() { return iter; }
     int &get_t_tsp() { return tsp; }
     std::vector<int> &get_path() { return path; }
+    void set_path(std::vector<int> &_path) { path = _path; }
+    void set_iter(int _iter) { iter = _iter; }
+    void set_t_curr(double _t_curr) { t_curr = _t_curr; }
+    void set_t_tsp(int _tsp) { tsp = _tsp; }
 };
 
 #endif
