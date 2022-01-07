@@ -15,6 +15,7 @@ private:
     int neighborhood_size;
     int max_iter;
     int epoch_count;
+    int duration;
 
 public:
     Params();
@@ -28,6 +29,7 @@ public:
     int &get_max_iter() { return max_iter; }
     int &get_neighborhood_size() { return neighborhood_size; }
     int &get_epoch_count() { return epoch_count; }
+    int &get_duration() { return duration; }
 };
 
 class State

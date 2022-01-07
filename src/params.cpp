@@ -2,7 +2,7 @@
 
 /** Params */
 
-Params::Params() : t_max(100000), t_min(1), max_iter(5000000)
+Params::Params() : t_max(100000), t_min(1), max_iter(100000000), duration(1), alfa(0.99999999999)
 {
 }
 
@@ -20,12 +20,9 @@ void Params::setParams()
         std::cout << "t_min: (t_min != 0)" << std::endl;
         std::cin >> t_min;
     } while (t_min == 0);
-    std::cout << "max_iter:" << std::endl;
-    std::cin >> max_iter;
-    // std::cout << "epoch_count:" << std::endl;
-    // std::cin >> epoch_count;
-    // std::cout << "neighborhood_size:" << std::endl;
-    // std::cin >> neighborhood_size;
+    std::cout << "duration:" << std::endl;
+    std::cin >> duration;
+
 }
 
 void Params::showParams()
@@ -33,9 +30,7 @@ void Params::showParams()
     std::cout << "simulated anneling parameters" << std::endl;
     std::cout << "t_max: " << t_max << std::endl;
     std::cout << "t_min :" << t_min << std::endl;
-    // std::cout << "step :" << step << std::endl;
-    // std::cout << "alfa :" << alfa << std::endl;
-    std::cout << "max_iter :" << max_iter << std::endl;
+    std::cout << "duration:" << duration << std::endl;
 }
 
 /** State */
