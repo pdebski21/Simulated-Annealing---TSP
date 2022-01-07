@@ -10,6 +10,7 @@ void menu()
 
     int control = -1;
     bool loop = true;
+    int test_iter = 0;
 
     while (loop)
     {
@@ -28,7 +29,6 @@ void menu()
             graph->show();
             break;
         case 2:
-            std::cout << "2) set stop criterion" << std::endl;
             params.setParams();
             params.showParams();
             break;
@@ -36,6 +36,9 @@ void menu()
             simulated_anneling(state, params, *graph);
             break;
         case 4:
+            std::cout << "enter test iteration count:" << std::endl;
+            std::cin >> test_iter;
+            test_sa(test_iter, state, params, *graph);
             break;
         case 5:
             loop = false;

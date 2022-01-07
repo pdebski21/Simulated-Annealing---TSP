@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 class Params
 {
@@ -11,10 +12,12 @@ private:
     double t_min;
     double step;
     double alfa;
+    int neighborhood_size;
     int max_iter;
+    int epoch_count;
 
 public:
-    Params(){};
+    Params();
     Params(double _t_max, double _t_min, double _step, double _alfa, int max_iter);
     void setParams();
     void showParams();
@@ -23,6 +26,8 @@ public:
     double &get_step() { return step; }
     double &get_alfa() { return alfa; }
     int &get_max_iter() { return max_iter; }
+    int &get_neighborhood_size() { return neighborhood_size; }
+    int &get_epoch_count() { return epoch_count; }
 };
 
 class State
@@ -48,6 +53,8 @@ public:
     void set_iter(int _iter) { iter = _iter; }
     void set_t_curr(double _t_curr) { t_curr = _t_curr; }
     void set_t_tsp(int _tsp) { tsp = _tsp; }
+
+    void inc_iter() { iter++; }
 };
 
 #endif
